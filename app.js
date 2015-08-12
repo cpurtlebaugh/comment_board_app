@@ -5,14 +5,18 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var app = express();
+
 // require modules for mongoose and passport
 var mongoose = require('mongoose');
+
+
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 var routes = require('./routes/index');
 
-var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -46,7 +50,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // connect to MongoDB
-mongoose.connect('mongodb://localhost/commentBoardApp');
+mongoose.connect('mongodb://localhost:27017/commentBoardApp');
 
 // catch 404 and forward to error handler
 // catch 404 and forward to error handler
