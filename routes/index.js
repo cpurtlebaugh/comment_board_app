@@ -12,35 +12,22 @@ router.get('/', function (req, res) {
 
 
 // users controller routes
-router.get('/auth/register', usersController.register);
+router.get('/register', usersController.register);
+
 router.post('/register', usersController.submit);
 
 
-router.get('/login', function (req, res) {
-  res.render('auth/login', {user : req.user});
-});
+// sessions controller routes
+router.get('/login', sessionsController.login);
 
 router.post('/login', passport.authenticate(
-  'local',
-  {
-    failureRedirect: '/login'
-  }),
-  function (req, res, next) {
-    req.session.save(function (err) {
-      if (err) return next(err);
-      res.redirect('/');
-    });
-  }
-);
+  'local', { failureRedirect: '/login'
+  }), sessionsController.submitLogin);
 
-router.get('/logout', function (req, res) {
-  req.logout();
-  res.redirect('/');
-});
 
-router.get('/secret', isLoggedIn, function (req, res) {
-  res.render('secret', {user: req.user});
-});
+router.get('/logout', sessionsController.logout);
+
+router.get('/secret', isLoggedIn, sessionsController.secret);
 
 // middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {

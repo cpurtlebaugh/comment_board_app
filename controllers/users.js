@@ -1,6 +1,6 @@
 var User = require('../models/User');
 
-var register = function (req, res) {
+var register = function(req, res, next) {
   res.render('auth/register');
 }
 
