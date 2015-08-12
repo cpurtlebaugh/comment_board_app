@@ -38,4 +38,6 @@ function isLoggedIn(req, res, next) {
   res.redirect('/login');
 }
 
+// comments controller routes
+
 module.exports = router;
